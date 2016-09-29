@@ -7,6 +7,14 @@ clear all
 
 stage4_image = im2double(imread('.\NIKOND40_0037_stage4_filtered.tif')); %image; %
 
-dlmwrite('.\images\NIKOND40_0037_stage4_filtered\r.txt',stage4_image(:,:,1),'delimiter',' ', 'precision','%.6f');
-dlmwrite('.\images\NIKOND40_0037_stage4_filtered\g.txt',stage4_image(:,:,2),'delimiter',' ', 'precision','%.6f');
-dlmwrite('.\images\NIKOND40_0037_stage4_filtered\b.txt',stage4_image(:,:,3),'delimiter',' ', 'precision','%.6f');
+% save image as binary file 
+fd = fopen('.\images\NIKOND40_0037_stage4_filtered\r.txt','w');
+    fwrite(fd,stage4_image(:,:,1)','double');
+    fclose(fd);
+    
+fd2 = fopen('.\images\NIKOND40_0037_stage4_filtered\g.txt','w');
+    fwrite(fd2,stage4_image(:,:,2)','double');
+    fclose(fd2);
+fd3 = fopen('.\images\NIKOND40_0037_stage4_filtered\b.txt','w');
+    fwrite(fd3,stage4_image(:,:,3)','double');
+    fclose(fd3);
