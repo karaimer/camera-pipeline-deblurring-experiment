@@ -1,16 +1,22 @@
 close all
 clear all
 
-r = importdata('.\images\NIKOND40_0037_stage4\r.txt');
-g = importdata('.\images\NIKOND40_0037_stage4\g.txt');
-b = importdata('.\images\NIKOND40_0037_stage4\b.txt');
+fd1 = fopen('.\images\NIKOND40_0037_stage4\r.txt','r');
+fd2 = fopen('.\images\NIKOND40_0037_stage4\g.txt','r');
+fd3 = fopen('.\images\NIKOND40_0037_stage4\b.txt','r');
+r = fread(fd1,[ 3008 2000], 'double');
+fclose(fd1);
+g = fread(fd2,[ 3008 2000], 'double');
+fclose(fd2);
+b = fread(fd3,[ 3008 2000], 'double');
+fclose(fd3);
 
-[m,n] = size(r); 
-image = zeros(m,n,3);
-image(:,:,1) = r;
-image(:,:,2) = g;
-image(:,:,3) = b;
-% image = im2double(image)/65536;
+image = zeros(2000, 3008, 3);
+image(:,:,1) = r';
+image(:,:,2) = g';
+image(:,:,3) = b';
+image = im2double(image);
+ 
 figure, imshow(image)
 
 filename = 'NIKOND40_0037_stage4.tif';
